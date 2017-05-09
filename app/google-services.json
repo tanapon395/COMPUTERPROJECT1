@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "642615160738",
+    "firebase_url": "https://computer-project-1.firebaseio.com",
+    "project_id": "computer-project-1",
+    "storage_bucket": "computer-project-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642615160738:android:385a7b45471eba92",
+        "android_client_info": {
+          "package_name": "com.example.tanapon.computerproject1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642615160738-4eb1769npanaop7ttduvpae85r3b0f96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5HYmscZXTIoAqPVGNGC2QyyIsXmK91eU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
