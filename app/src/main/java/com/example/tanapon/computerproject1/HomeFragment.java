@@ -21,8 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,20 +42,7 @@ public class HomeFragment extends Fragment {
     private int dotscount;
     private ImageView[] dots;
 
-    //Realtime Text from firebase
-    private TextView MsgTxt;
-
-    //Firebase
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mRootReference = firebaseDatabase.getReference();
-    private DatabaseReference mCgildReference = mRootReference.child("home");
-
-    //ListView Firebase
-    DatabaseReference dref;
-    ListView home_listview;
-    ArrayList<String> home_list = new ArrayList<>();
-
-    //CardView
+    //CaredView list menu promote
     RecyclerView recyclerView1;
     RecyclerView.LayoutManager layoutManager1;
     RecyclerView.Adapter adapter1;
@@ -95,50 +80,17 @@ public class HomeFragment extends Fragment {
 
         //ImageList
         viewPager = (ViewPager) myView.findViewById(R.id.viewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity());
+        ViewPagerAdapterHome viewPagerAdapter = new ViewPagerAdapterHome(getActivity());
         viewPager.setAdapter(viewPagerAdapter);
 
-
-//        //Realtime Text from firebase
-//        MsgTxt = (TextView) myView.findViewById(R.id.msgTxt1);
-
-
-        //CaredView
+        //CaredView list menu promote
         recyclerView = (RecyclerView) myView.findViewById(R.id.recycler_view1);
 
         layoutManager1 = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager1);
 
-        adapter1 = new RecyclerAdapter();
+        adapter1 = new RecyclerAdapterHome();
         recyclerView.setAdapter(adapter1);
-
-//        //Home_ListView
-//        home_listview=(ListView)myView.findViewById(R.id.home_listview);
-//        final ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,home_list);
-//        home_listview.setAdapter(adapter);
-//        dref = FirebaseDatabase.getInstance().getReference().child("promotion");
-//        dref.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                home_list.add(dataSnapshot.getValue(String.class));
-//                adapter.notifyDataSetChanged();
-//            }
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//            }
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                home_list.remove(dataSnapshot.getValue(String.class));
-//                adapter.notifyDataSetChanged();
-//            }
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        });
-
 
 //        //DOTS
 //        dotscount = viewPagerAdapter.getCount();
@@ -211,7 +163,6 @@ public class HomeFragment extends Fragment {
     //CardView
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_card_demo, menu);
         return true;
@@ -219,40 +170,14 @@ public class HomeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-//    //Realtime Text Firebase
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Read from the database
-//        mCgildReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String message = dataSnapshot.getValue(String.class);
-//                MsgTxt.setText(message);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
-//    }
 
     /**
      * Adding few albums for testing

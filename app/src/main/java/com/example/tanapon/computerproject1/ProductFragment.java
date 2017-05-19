@@ -3,10 +3,11 @@ package com.example.tanapon.computerproject1;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Tanapon on 29/3/2560.
@@ -24,11 +25,11 @@ import java.util.HashMap;
 public class ProductFragment extends Fragment {
     View myView;
 
+
     private DatabaseReference mRoot;
-    private ArrayList<HashMap<String, String>> list;
-    public static final String FIRST_COLUMN = "Column 1";
-    public static final String SECOND_COLUMN = "Column 2";
-    listviewAdapterProject adapter;
+    private RecyclerView recyclerView;
+    private MyAdapter_Product adapter;
+    private List<RecyclerItem_Product> listItems;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,15 +44,20 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.product, container, false);
 
-        //MsgTxt = (TextView) myView.findViewById(R.id.msgTxt);
-
         mRoot = FirebaseDatabase.getInstance().getReference().child("menu");
-        list = new ArrayList<HashMap<String, String>>();
+        recyclerView = (RecyclerView) myView.findViewById(R.id.recyclerView_product);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ListView lview = (ListView) myView.findViewById(R.id.product_list);
+        listItems = new ArrayList<>();
+
+        //Generate sample data
         populateList();
-        adapter = new listviewAdapterProject(getActivity(), list, R.layout.product_list_item);
-        lview.setAdapter(adapter);
+
+        //Set adapter
+        adapter = new MyAdapter_Product(listItems, getActivity());
+        recyclerView.setAdapter(adapter);
+
         return myView;
     }
 
@@ -59,12 +65,9 @@ public class ProductFragment extends Fragment {
         mRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                list.clear();
-                for (DataSnapshot data : dataSnapshot.getChildren()){
-                    HashMap<String, String> temp = new HashMap<String, String>();
-                    temp.put(FIRST_COLUMN, data.child("name_menu").getValue().toString());
-                    temp.put(SECOND_COLUMN, data.child("price").getValue().toString());
-                    list.add(temp);
+                listItems.clear();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    listItems.add(new RecyclerItem_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString()+" บาท"));
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -74,7 +77,7 @@ public class ProductFragment extends Fragment {
 
             }
         });
-
     }
+
 
 }

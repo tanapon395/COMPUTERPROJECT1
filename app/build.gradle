@@ -20,6 +20,11 @@ android {
     }
 
 }
+//Button circle
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -42,6 +47,12 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.5'
     // Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    //Image circle
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
+    //Button circle
+    compile 'com.github.markushi:circlebutton:1.1'
+
+
 
 
 

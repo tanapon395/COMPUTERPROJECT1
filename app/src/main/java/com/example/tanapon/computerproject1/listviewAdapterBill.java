@@ -64,7 +64,7 @@ public class listviewAdapterBill extends BaseAdapter
 
         if (convertView == null)
         {
-            convertView = inflater.inflate(R.layout.rows, null);
+            convertView = inflater.inflate(R.layout.rows_bill, null);
             holder = new ViewHolder();
             holder.txtFirst = (TextView) convertView.findViewById(R.id.column1);
             holder.txtSecond = (TextView) convertView.findViewById(R.id.column2);

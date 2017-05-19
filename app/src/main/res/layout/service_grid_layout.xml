@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:padding="15dp"
     android:elevation="5dp"
-    android:background="#ffffff"
+    android:background="@color/iron"
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:id="@+id/imageHolder"
         android:src="@mipmap/ic_notes"
+
         />
     <TextView
         android:layout_width="match_parent"

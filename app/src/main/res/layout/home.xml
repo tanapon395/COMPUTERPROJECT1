@@ -6,56 +6,83 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".HomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10sp">
-            <include layout="@layout/slider_image" />
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/promotion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="10sp"
-            android:text="โปรโมชั่น"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp">
+            android:orientation="vertical">
 
-            <include layout="@layout/content_main_cardview" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/menu_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="10sp"
+                    android:text="รายการอาหารแนะนำ"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40sp"
+                    android:orientation="vertical">
+                    <include layout="@layout/activity_card_demo" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:elevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10sp">
+
+                    <include layout="@layout/slider_image_home" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/promotion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="10sp"
+                    android:text="โปรโมชั่น"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40sp">
+
+                    <include layout="@layout/content_home_cardview" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/menu_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="10sp"
-            android:text="รายการอาหารแนะนำ"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp">
-
-            <include layout="@layout/activity_card_demo" />
-        </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
 

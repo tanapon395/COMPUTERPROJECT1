@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">COMPUTER_PROJECT_1</string>
+    <string name="app_name">Grill_pork</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,6 +37,20 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="product_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="sex_prompt">Choose a sex</string>
+    <string-array name="sex_array">
+        <item>Man</item>
+        <item>Woman</item>
+    </string-array>
 
 
 </resources>
