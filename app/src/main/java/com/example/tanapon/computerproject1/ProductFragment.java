@@ -25,18 +25,18 @@ import java.util.List;
 public class ProductFragment extends Fragment {
     View myView;
 
-
     private DatabaseReference mRoot;
+    private LinearLayoutManager lLayout;
+    private RecyclerViewAdapter_Product adapter;
     private RecyclerView recyclerView;
-    private MyAdapter_Product adapter;
-    private List<RecyclerItem_Product> listItems;
+    ArrayList<String> myArrList;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     public ProductFragment() {
-
     }
 
     @Nullable
@@ -49,25 +49,29 @@ public class ProductFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        listItems = new ArrayList<>();
+        myArrList = new ArrayList<>();
 
-        //Generate sample data
-        populateList();
+        List<ItemObject_Product> rowListItem = getAllItemList();
 
-        //Set adapter
-        adapter = new MyAdapter_Product(listItems, getActivity());
+        lLayout = new LinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(lLayout);
+        adapter = new RecyclerViewAdapter_Product(getActivity(), rowListItem, myArrList);
+
         recyclerView.setAdapter(adapter);
-
         return myView;
     }
 
-    private void populateList() {
+    private List<ItemObject_Product> getAllItemList() {
+
+        final List<ItemObject_Product> allItems = new ArrayList<ItemObject_Product>();
         mRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                listItems.clear();
+//                myArrList.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    listItems.add(new RecyclerItem_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString()+" บาท"));
+                    allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"));
+                    myArrList.add(data.getKey());
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -77,6 +81,9 @@ public class ProductFragment extends Fragment {
 
             }
         });
+
+
+        return allItems;
     }
 
 

@@ -39,5 +39,6 @@
             android:layout_below="@+id/item_title"
             android:layout_toRightOf="@+id/item_image" />
 
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -1,15 +1,12 @@
 package com.example.tanapon.computerproject1;
 
-/**
- * Created by NgocTri on 11/5/2016.
- */
 
-public class RecyclerItem_Product {
+public class ItemObject_Product {
 
     private String title;
     private String description;
 
-    public RecyclerItem_Product(String title, String description) {
+    public ItemObject_Product(String title, String description) {
         this.title = title;
         this.description = description;
     }
@@ -29,4 +26,5 @@ public class RecyclerItem_Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

@@ -5,21 +5,39 @@
     android:orientation="horizontal">
 
     <TextView
-        android:textSize="15dp"
         android:id="@+id/column1"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:text="First" />
+        android:layout_marginLeft="20dp"
+
+        android:text="First"
+        android:textSize="15dp" />
 
     <TextView
-        android:textSize="15dp"
         android:id="@+id/column2"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:layout_weight="1"
-        android:text="Second" />
+
+        android:text="Second"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/column3"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:text="Second"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/column4"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+
+        android:text="Second"
+        android:textSize="15dp" />
+
 
 </LinearLayout>

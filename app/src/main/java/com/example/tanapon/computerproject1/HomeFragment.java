@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         layoutManager1 = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager1);
 
-        adapter1 = new RecyclerAdapterHome();
+        adapter1 = new RecyclerAdapterHome(getActivity());
         recyclerView.setAdapter(adapter1);
 
 //        //DOTS
