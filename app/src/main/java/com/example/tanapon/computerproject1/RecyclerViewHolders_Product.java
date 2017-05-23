@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,21 +19,26 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import static android.R.attr.defaultValue;
+
 public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
 
     public TextView txtTitle;
     public TextView txtDescription;
     public ImageButton txtOptionDigit;
     private DatabaseReference mRoot, mCheck;
+    SharedPreferences sharedPref ;
     String list = "";
 
 
     public RecyclerViewHolders_Product(View itemView, final Context mContext, final ArrayList<String> myArrList) {
         super(itemView);
-
         txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
         txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
         txtOptionDigit = (ImageButton) itemView.findViewById(R.id.txtOptionDigit);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        int defaultValue = 0;
 
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +49,6 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View alertLayout = inflater.inflate(R.layout.custom_dialog_product, null);
                 final Spinner spNumber = (Spinner) alertLayout.findViewById(R.id.thai_club);
-                Log.e("Check", "Product3");
 
                 final String[] CLUBS12 = {"หมูเเนื้อแดง", "หมูสามชั้น", "ทะเล", "รวมมิตร"};
                 final String[] CLUBS35 = {"ขวดเล็ก", "ขวดใหญ่"};
@@ -54,21 +57,6 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
                 final int position = getAdapterPosition();
 
                 if (position == 0) {
-//                    mCheck = mRoot.child("").child("");
-//                    mRoot.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-//                                allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"));
-//                                adapter.notifyDataSetChanged();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
 //                    for (int i = 0; i < myArrList.size(); i++) {
 //                        list = list + myArrList.get(i) + ",";
 //                    }
@@ -90,8 +78,6 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
     public void AlertDialog(final String[] list, final Context mContext, final Spinner spNumber, View alertLayout, String check) {
         final ArrayList<Integer> mMultiSelected_menu35 = new ArrayList<Integer>();
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        int defaultValue = 0;
         long highScore = sharedPref.getInt("saved_high_score", defaultValue);
 
         mRoot = FirebaseDatabase.getInstance().getReference().child("orders");

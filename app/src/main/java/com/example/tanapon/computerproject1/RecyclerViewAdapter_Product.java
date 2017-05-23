@@ -35,12 +35,12 @@ public class RecyclerViewAdapter_Product extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerViewHolders_Product holder, int position) {
         holder.txtTitle.setText(itemList.get(position).getTitle());
         holder.txtDescription.setText(itemList.get(position).getDescription());
-        holder.txtOptionDigit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        holder.txtOptionDigit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
         @Override
