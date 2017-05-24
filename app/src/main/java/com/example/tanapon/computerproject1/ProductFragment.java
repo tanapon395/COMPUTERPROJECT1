@@ -68,7 +68,7 @@ public class ProductFragment extends Fragment {
         mRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                myArrList.clear();
+                myArrList.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"));
                     myArrList.add(data.getKey());

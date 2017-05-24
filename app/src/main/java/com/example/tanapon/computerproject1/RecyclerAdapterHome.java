@@ -20,18 +20,18 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         this.mContext = mContext;
     }
 
-    private String[] titles = {"Chapter One",
-            "Chapter Two",
-            "Chapter Three",
+    private String[] titles = {"กุ้งแม่น้ำเผาอร่อยสุดๆ",
+            "ปูทะเลสดๆ",
+            "ปลาหมึกสดๆ",
     };
 
-    private String[] details = {"Item one details",
-            "Item two details", "Item three details",
+    private String[] details = {"กุ้งเผา กิโลกรัมละ 200 บาท พร้อมบริการเผาฟรี",
+            "ปูทะแล กิโลกรัมละ 250 บาท พร้อมบริการเผาฟรี", "ปลาหมึก กิโลกรัมล่ะ 200 บาท พร้อมบริการย่างฟรี",
     };
 
-    private int[] images = {R.drawable.android_image_1,
-            R.drawable.android_image_2,
-            R.drawable.android_image_3,
+    private int[] images = {R.drawable.home2,
+            R.drawable.home3,
+            R.drawable.home1,
     };
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -64,7 +64,6 @@ public class listviewAdapterBill extends BaseAdapter {
         // TODO Auto-generated method stub
         ViewHolder holder;
         LayoutInflater inflater = activity.getLayoutInflater();
-
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.rows_bill, null);
             holder = new ViewHolder();
