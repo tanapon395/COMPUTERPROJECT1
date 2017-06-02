@@ -64,6 +64,17 @@ public class Login extends Activity {
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putInt("saved_high_score", i);
                             editor.commit();
+                            if (check == 1){
+                                SharedPreferences sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor editor_bill = sharedPref_bill.edit();
+                                editor.putString("bill", "-KkMkfyYUWlCd3-dsB0v");
+                                editor.commit();
+                            }else {
+                                SharedPreferences sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor editor_bill = sharedPref_bill.edit();
+                                editor.putString("bill", "-KkMlGsv_BLqMUUTgBmW");
+                                editor.commit();
+                            }
 
                         } else {
                             Toast.makeText(getApplicationContext(), "user name หรือ password ไม่ถูกต้อง", Toast.LENGTH_SHORT).show();

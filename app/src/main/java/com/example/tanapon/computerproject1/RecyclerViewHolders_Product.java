@@ -14,8 +14,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,9 +29,10 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
     public TextView txtTitle;
     public TextView txtDescription;
     public ImageButton txtOptionDigit;
-    private DatabaseReference mRoot, mCheck;
-    SharedPreferences sharedPref ;
+    private DatabaseReference mRoot, mRoot_Bill, mCheck, mSumNumber, mSumPrice;
+    SharedPreferences sharedPref, sharedPref_bill;
     String list = "";
+    int sumPrice = 0, sumNumber = 0;
 
 
     public RecyclerViewHolders_Product(View itemView, final Context mContext, final ArrayList<String> myArrList) {
@@ -39,7 +43,6 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         int defaultValue = 0;
-
 
         itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -60,29 +63,58 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
 //                    for (int i = 0; i < myArrList.size(); i++) {
 //                        list = list + myArrList.get(i) + ",";
 //                    }
-                    AlertDialog(CLUBS12, mContext, spNumber, alertLayout, "-KkMSPC97aadtyTy3F8N");
+                    AlertDialog(CLUBS12, mContext, spNumber, alertLayout, "-KkMSPC97aadtyTy3F8N", 200);
                 } else if (position == 1) {
-                    AlertDialog(CLUBS12, mContext, spNumber, alertLayout, "-KkMSSNFs7FtSocVqGFS");
+                    AlertDialog(CLUBS12, mContext, spNumber, alertLayout, "-KkMSSNFs7FtSocVqGFS", 150);
                 } else if (position == 2) {
-                    AlertDialog(CLUBS35, mContext, spNumber, alertLayout, "-KkMTcMe8UfA9d4zCmmB");
+                    AlertDialog(CLUBS35, mContext, spNumber, alertLayout, "-KkMTcMe8UfA9d4zCmmB", 50);
                 } else if (position == 3) {
-                    AlertDialog(CLUBS4, mContext, spNumber, alertLayout, "-KkMTcePY8knva3GO8BP");
+                    AlertDialog(CLUBS4, mContext, spNumber, alertLayout, "-KkMTcePY8knva3GO8BP", 10);
                 } else if (position == 4) {
-                    AlertDialog(CLUBS35, mContext, spNumber, alertLayout, "-KkMTctHCbZ9OVl8jqZa");
+                    AlertDialog(CLUBS35, mContext, spNumber, alertLayout, "-KkMTctHCbZ9OVl8jqZa", 15);
                 }
             }
         });
 
     }
 
-    public void AlertDialog(final String[] list, final Context mContext, final Spinner spNumber, View alertLayout, String check) {
+    public void AlertDialog(final String[] list, final Context mContext, final Spinner spNumber, View alertLayout, final String check, final int price) {
         final ArrayList<Integer> mMultiSelected_menu35 = new ArrayList<Integer>();
 
-        long highScore = sharedPref.getInt("saved_high_score", defaultValue);
+        //sharedPref_bill
+        sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String bill_get = "";
+        String bill = sharedPref.getString("bill", bill_get);
+        //sharedPref_table
+        final long highScore = sharedPref.getInt("saved_high_score", defaultValue);
 
         mRoot = FirebaseDatabase.getInstance().getReference().child("orders");
         mCheck = mRoot.child("table_" + String.valueOf(highScore)).child(check).push();
+        mSumNumber = mRoot.child("table_" + String.valueOf(highScore)).child(check).child("sum_menu");
+        mSumPrice = mRoot.child("table_" + String.valueOf(highScore)).child(check).child("price");
 
+        mRoot_Bill = FirebaseDatabase.getInstance().getReference().child("bill").child(bill).child("table_" + String.valueOf(highScore));
+
+        mSumNumber.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                sumNumber = Integer.parseInt(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        mSumPrice.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                sumPrice = Integer.parseInt(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("เลือกวัตถุดิบ");
 
@@ -108,8 +140,18 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
                     buffer.append(list[team]);
                 }
                 String sp = String.valueOf(spNumber.getSelectedItem());
+
                 mCheck.child("list").setValue(buffer.toString());
                 mCheck.child("number").setValue(sp);
+
+                sumNumber = (sumNumber + Integer.parseInt(sp));
+                mSumNumber.setValue(sumNumber);
+
+                mRoot_Bill.child(check).setValue(sumNumber);
+
+                sumPrice = (sumNumber * price);
+                mSumPrice.setValue(sumPrice);
+
                 Toast.makeText(mContext, "คุณเลือก " + buffer.toString() + "\nจำนวน " + sp, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }

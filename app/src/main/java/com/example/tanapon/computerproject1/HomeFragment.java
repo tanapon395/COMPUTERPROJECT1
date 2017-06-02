@@ -65,7 +65,6 @@ public class HomeFragment extends Fragment {
         Toolbar toolbar = (Toolbar) myView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-
         recyclerView = (RecyclerView) myView.findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
@@ -82,6 +81,12 @@ public class HomeFragment extends Fragment {
         viewPager = (ViewPager) myView.findViewById(R.id.viewPager);
         ViewPagerAdapterHome viewPagerAdapter = new ViewPagerAdapterHome(getActivity());
         viewPager.setAdapter(viewPagerAdapter);
+
+        //TIMER
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new MyTimerTask(), 9000, 4000);
+
+
 
         //CaredView list menu promote
         recyclerView = (RecyclerView) myView.findViewById(R.id.recycler_view1);
@@ -133,10 +138,6 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-//        //TIMER
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new MyTimerTask(), 5000, 9000);
-
         return myView;
     }
 
@@ -161,7 +162,6 @@ public class HomeFragment extends Fragment {
     }
 
     //CardView
-
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_card_demo, menu);
