@@ -64,14 +64,25 @@ public class ProductFragment extends Fragment {
 
     private List<ItemObject_Product> getAllItemList() {
 
-        final List<ItemObject_Product> allItems = new ArrayList<ItemObject_Product>();
+        final List<ItemObject_Product> allItems = new ArrayList<>();
         mRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myArrList.clear();
+                int[] covers = new int[]{
+                        R.mipmap.ic_barbecue,
+                        R.mipmap.ic_steak,
+                        R.mipmap.ic_sparkling,
+                        R.mipmap.ic_ice,
+                        R.mipmap.ic_water
+                };
+                int count = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"));
+                    ItemObject_Product a = new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท", covers[count]);
+                    allItems.add(a);
+//                    allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"), R.drawable.ic_menu_camera);
                     myArrList.add(data.getKey());
+                    count++;
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -81,7 +92,6 @@ public class ProductFragment extends Fragment {
 
             }
         });
-
 
         return allItems;
     }

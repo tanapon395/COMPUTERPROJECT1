@@ -35,6 +35,7 @@ public class RecyclerViewAdapter_Product extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerViewHolders_Product holder, int position) {
         holder.txtTitle.setText(itemList.get(position).getTitle());
         holder.txtDescription.setText(itemList.get(position).getDescription());
+        holder.txtOptionDigit.setBackgroundResource(itemList.get(position).getOptionDigit());
 //        holder.txtOptionDigit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -43,8 +44,8 @@ public class RecyclerViewAdapter_Product extends RecyclerView.Adapter<RecyclerVi
 //        });
     }
 
-        @Override
-        public int getItemCount () {
-            return this.itemList.size();
-        }
+    @Override
+    public int getItemCount() {
+        return this.itemList.size();
     }
+}

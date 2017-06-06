@@ -22,6 +22,7 @@ import java.util.Objects;
 public class Login extends Activity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRootReference = firebaseDatabase.getReference().child("table");
+    private DatabaseReference checkBill = FirebaseDatabase.getInstance().getReference().child("status");
     public String user_login, pass_login, user_check;
     public int i, check = 0;
 
@@ -54,7 +55,7 @@ public class Login extends Activity {
                         ProgressDialog progressDialog = new ProgressDialog(Login.this, R.style.AppTheme_Dark_Dialog);
                         progressDialog.setIndeterminate(true);
                         progressDialog.setMessage("Authenticating...");
-                        progressDialog.show();
+//                        progressDialog.show();
                         if (Objects.equals(pass, pass_login)) {
                             check = i;
                             startActivity(intent);
@@ -64,18 +65,19 @@ public class Login extends Activity {
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putInt("saved_high_score", i);
                             editor.commit();
-                            if (check == 1){
+                            if (check == 1) {
                                 SharedPreferences sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                 SharedPreferences.Editor editor_bill = sharedPref_bill.edit();
                                 editor.putString("bill", "-KkMkfyYUWlCd3-dsB0v");
                                 editor.commit();
-                            }else {
+                            } else {
                                 SharedPreferences sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                 SharedPreferences.Editor editor_bill = sharedPref_bill.edit();
                                 editor.putString("bill", "-KkMlGsv_BLqMUUTgBmW");
                                 editor.commit();
                             }
 
+                            checkBill.child("table_" + String.valueOf(check)).setValue("1");
                         } else {
                             Toast.makeText(getApplicationContext(), "user name หรือ password ไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
                         }

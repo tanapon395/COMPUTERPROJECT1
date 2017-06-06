@@ -30,14 +30,16 @@ import java.util.List;
 
 public class BillFragment extends Fragment {
     View myview;
-    SharedPreferences sharedPref,sharedPref_bill;
-    private DatabaseReference mRoot,mRoot_Bill, mCheck, mDatabase;
+    SharedPreferences sharedPref, sharedPref_bill;
+    private DatabaseReference mRoot, mRoot_Bill, mCheck, mDatabase;
     private LinearLayoutManager lLayout;
     private Bill_RecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     ArrayList<String> myArrList_bill;
     private int sumPrice = 0;
     TextView totalBill;
+    private DatabaseReference checkBill = FirebaseDatabase.getInstance().getReference().child("status");
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class BillFragment extends Fragment {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         int defaultValue = 0;
-        long highScore = sharedPref.getInt("saved_high_score", defaultValue);
+        final long highScore = sharedPref.getInt("saved_high_score", defaultValue);
 
         sharedPref_bill = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String bill_get = "";
@@ -101,6 +103,7 @@ public class BillFragment extends Fragment {
                 builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Toast.makeText(getActivity(), "ขอบคุณที่ใช้บริการ", Toast.LENGTH_SHORT).show();
+                        checkBill.child("table_" + String.valueOf(highScore)).setValue("2");
                     }
                 });
                 builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {

@@ -22,12 +22,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
 /**
  * Created by Tanapon on 29/3/2560.
@@ -51,10 +47,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
-
-    // Read from the database
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("promotion");
 
 
     @Nullable
@@ -81,12 +73,6 @@ public class HomeFragment extends Fragment {
         viewPager = (ViewPager) myView.findViewById(R.id.viewPager);
         ViewPagerAdapterHome viewPagerAdapter = new ViewPagerAdapterHome(getActivity());
         viewPager.setAdapter(viewPagerAdapter);
-
-        //TIMER
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new MyTimerTask(), 9000, 4000);
-
-
 
         //CaredView list menu promote
         recyclerView = (RecyclerView) myView.findViewById(R.id.recycler_view1);
@@ -138,28 +124,50 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
+//        //TIMER
+//        final Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (viewPager.getCurrentItem() == 0) {
+//                            viewPager.setCurrentItem(1);
+//                        } else if (viewPager.getCurrentItem() == 1) {
+//                            viewPager.setCurrentItem(2);
+//                        } else if (viewPager.getCurrentItem() == 2) {
+//                            viewPager.setCurrentItem(0);
+//                        }
+//                                            }
+//                });
+//            }
+//        }, 9000, 4000);
+
+
         return myView;
     }
 
-    //Timer
-    public class MyTimerTask extends TimerTask {
-
-        @Override
-        public void run() {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (viewPager.getCurrentItem() == 0) {
-                        viewPager.setCurrentItem(1);
-                    } else if (viewPager.getCurrentItem() == 1) {
-                        viewPager.setCurrentItem(2);
-                    } else {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-            });
-        }
-    }
+//    //Timer
+//    public class MyTimerTask extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//            getActivity().runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if (viewPager.getCurrentItem() == 0) {
+//                        viewPager.setCurrentItem(1);
+//                    } else if (viewPager.getCurrentItem() == 1) {
+//                        viewPager.setCurrentItem(2);
+//                    } else {
+//                        viewPager.setCurrentItem(0);
+//                    }
+//                }
+//            });
+//        }
+//
+//    }
 
     //CardView
     public boolean onCreateOptionsMenu(Menu menu) {

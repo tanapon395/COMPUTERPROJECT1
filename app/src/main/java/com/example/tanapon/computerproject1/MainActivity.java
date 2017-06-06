@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView tvHeaderName;
     SharedPreferences sharedPref;
+    int x = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                x = 3;
                 BillFragment billFragment = new BillFragment();
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.content_frame, billFragment).commit();
@@ -103,13 +105,25 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.bill));
-                    isShow = true;
-                }  else if (isShow) {
+                    if (x == 0) {
+                        collapsingToolbar.setTitle(getString(R.string.home));
+                        isShow = true;
+                    } else if (x == 1) {
+                        collapsingToolbar.setTitle(getString(R.string.product));
+                        isShow = true;
+                    } else if (x == 2) {
+                        collapsingToolbar.setTitle(getString(R.string.service));
+                        isShow = true;
+                    } else if (x == 3) {
+                        collapsingToolbar.setTitle(getString(R.string.bill));
+                        isShow = true;
+                    }
+                } else if (isShow) {
                     collapsingToolbar.setTitle(" ");
                     isShow = false;
                 }
@@ -139,25 +153,25 @@ public class MainActivity extends AppCompatActivity
             HomeFragment homeFragment = new HomeFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.content_frame, homeFragment).commit();
-
+            x = 0;
             Toast.makeText(this, "หน้าหลัก", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.product) {
             ProductFragment productFragment = new ProductFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.content_frame, productFragment).commit();
-
+            x = 1;
             Toast.makeText(this, "เมนูอาหาร", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.service) {
             ServiceFragment serviceFragment = new ServiceFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.content_frame, serviceFragment).commit();
-
+            x = 2;
             Toast.makeText(this, "บริการ", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.bill) {
             BillFragment billFragment = new BillFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.content_frame, billFragment).commit();
-
+            x = 3;
             Toast.makeText(this, "ชำระเงิน", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.login) {
             startActivity(new Intent(this, Login.class));
