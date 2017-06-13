@@ -21,13 +21,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 
-public class gridAdapterService extends BaseAdapter {
+public class ServiceGridAdapter extends BaseAdapter {
     ArrayList names;
     public static Activity activity;
 
     private DatabaseReference mDatabase;
 
-    public gridAdapterService(Activity activity, ArrayList names) {
+    public ServiceGridAdapter(Activity activity, ArrayList names) {
         this.activity = activity;
         this.names = names;
     }

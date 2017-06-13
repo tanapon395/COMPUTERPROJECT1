@@ -19,10 +19,10 @@ import java.util.List;
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
+public class Home_AlbumsAdapter extends RecyclerView.Adapter<Home_AlbumsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Album> albumList;
+    private List<Home_Album> albumList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
@@ -38,7 +38,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     }
 
 
-    public AlbumsAdapter(Context mContext, List<Album> albumList) {
+    public Home_AlbumsAdapter(Context mContext, List<Home_Album> albumList) {
         this.mContext = mContext;
         this.albumList = albumList;
     }
@@ -46,16 +46,16 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_card_home, parent, false);
+                .inflate(R.layout.home_album_card, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Album album = albumList.get(position);
+        Home_Album album = albumList.get(position);
         holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+
 
         // loading album cover using Glide library
         Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
@@ -93,9 +93,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             switch (menuItem.getItemId()) {
                 case R.id.action_add_favourite:
                     Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-                    return true;
-                case R.id.action_play_next:
-                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

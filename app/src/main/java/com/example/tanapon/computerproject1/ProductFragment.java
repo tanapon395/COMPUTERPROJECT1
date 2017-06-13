@@ -27,7 +27,7 @@ public class ProductFragment extends Fragment {
 
     private DatabaseReference mRoot;
     private LinearLayoutManager lLayout;
-    private RecyclerViewAdapter_Product adapter;
+    private Product_RecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     ArrayList<String> myArrList;
 
@@ -51,20 +51,20 @@ public class ProductFragment extends Fragment {
 
         myArrList = new ArrayList<>();
 
-        List<ItemObject_Product> rowListItem = getAllItemList();
+        List<Product_ItemObject> rowListItem = getAllItemList();
 
         lLayout = new LinearLayoutManager(getActivity());
 
         recyclerView.setLayoutManager(lLayout);
-        adapter = new RecyclerViewAdapter_Product(getActivity(), rowListItem, myArrList);
+        adapter = new Product_RecyclerViewAdapter(getActivity(), rowListItem, myArrList);
 
         recyclerView.setAdapter(adapter);
         return myView;
     }
 
-    private List<ItemObject_Product> getAllItemList() {
+    private List<Product_ItemObject> getAllItemList() {
 
-        final List<ItemObject_Product> allItems = new ArrayList<>();
+        final List<Product_ItemObject> allItems = new ArrayList<>();
         mRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -74,13 +74,20 @@ public class ProductFragment extends Fragment {
                         R.mipmap.ic_steak,
                         R.mipmap.ic_sparkling,
                         R.mipmap.ic_ice,
-                        R.mipmap.ic_water
+                        R.mipmap.ic_water,
+                        R.mipmap.ic_plus,
                 };
                 int count = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    ItemObject_Product a = new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท", covers[count]);
-                    allItems.add(a);
-//                    allItems.add(new ItemObject_Product(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"), R.drawable.ic_menu_camera);
+                    if (count < 5) {
+                        Product_ItemObject a = new Product_ItemObject(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท", covers[count]);
+                        allItems.add(a);
+                    }
+                    else {
+                        Product_ItemObject a = new Product_ItemObject(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท", covers[5]);
+                        allItems.add(a);
+                    }
+//                    allItems.add(new Product_ItemObject(data.child("name_menu").getValue().toString(), "ราคา " + data.child("price").getValue().toString() + " บาท"), R.drawable.ic_menu_camera);
                     myArrList.add(data.getKey());
                     count++;
                     adapter.notifyDataSetChanged();

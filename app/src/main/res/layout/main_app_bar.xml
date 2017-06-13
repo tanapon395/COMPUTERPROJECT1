@@ -74,13 +74,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_margin="@dimen/fab_margin"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    app:borderWidth="20dp"
+                    app:elevation="6dp"
+                    app:srcCompat="@mipmap/ic_pay" />
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/main_content" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 package com.example.tanapon.computerproject1;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +47,8 @@ public class HomeFragment extends Fragment {
 
     //CardView
     private RecyclerView recyclerView;
-    private AlbumsAdapter adapter;
-    private List<Album> albumList;
+    private Home_AlbumsAdapter adapter;
+    private List<Home_Album> albumList;
 
 
     @Nullable
@@ -60,7 +62,7 @@ public class HomeFragment extends Fragment {
         recyclerView = (RecyclerView) myView.findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
-        adapter = new AlbumsAdapter(getActivity(), albumList);
+        adapter = new Home_AlbumsAdapter(getActivity(), albumList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -71,7 +73,7 @@ public class HomeFragment extends Fragment {
 
         //ImageList
         viewPager = (ViewPager) myView.findViewById(R.id.viewPager);
-        ViewPagerAdapterHome viewPagerAdapter = new ViewPagerAdapterHome(getActivity());
+        Home_ViewPagerAdapter viewPagerAdapter = new Home_ViewPagerAdapter(getActivity());
         viewPager.setAdapter(viewPagerAdapter);
 
         //CaredView list menu promote
@@ -80,8 +82,27 @@ public class HomeFragment extends Fragment {
         layoutManager1 = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager1);
 
-        adapter1 = new RecyclerAdapterHome(getActivity());
+        adapter1 = new Home_RecyclerAdapter(getActivity());
         recyclerView.setAdapter(adapter1);
+
+        //Menu All
+        TextView menuAll = (TextView) myView.findViewById(R.id.menu_all);
+
+        menuAll.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), HomeMenu.class));
+            }
+        });
+
+        //Promotion All
+        TextView promotionAll = (TextView) myView.findViewById(R.id.promotion_all);
+
+        promotionAll.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), HomePromotion.class));
+            }
+        });
+
 
 //        //DOTS
 //        dotscount = viewPagerAdapter.getCount();
@@ -198,16 +219,16 @@ public class HomeFragment extends Fragment {
                 R.drawable.im4
         };
 
-        Album a = new Album("ลดราคา 10%", 13, covers[0]);
+        Home_Album a = new Home_Album("ลดราคา 10%", covers[0]);
         albumList.add(a);
 
-        a = new Album("check in Free 1", 8, covers[1]);
+        a = new Home_Album("check in Free 1", covers[1]);
         albumList.add(a);
 
-        a = new Album("ซื้อ 2 แถม 1", 11, covers[2]);
+        a = new Home_Album("ซื้อ 2 แถม 1", covers[2]);
         albumList.add(a);
 
-        a = new Album("มา 4 จ่าย 3", 11, covers[3]);
+        a = new Home_Album("มา 4 จ่าย 3", covers[3]);
         albumList.add(a);
 
         adapter.notifyDataSetChanged();
@@ -258,6 +279,8 @@ public class HomeFragment extends Fragment {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
+
 
 }
 

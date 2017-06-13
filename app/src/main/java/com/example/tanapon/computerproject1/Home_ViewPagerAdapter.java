@@ -12,12 +12,12 @@ import android.widget.ImageView;
  * Created by Tanapon on 18/4/2560.
  */
 
-public class ViewPagerAdapterHome extends PagerAdapter {
+public class Home_ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private Integer[] imager = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
 
-    public ViewPagerAdapterHome(Context context) {
+    public Home_ViewPagerAdapter(Context context) {
         this.context = context;
     }
 
@@ -34,7 +34,7 @@ public class ViewPagerAdapterHome extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.castom_home, null);
+        View view = layoutInflater.inflate(R.layout.home_castom, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
         imageView.setImageResource(imager[position]);
 

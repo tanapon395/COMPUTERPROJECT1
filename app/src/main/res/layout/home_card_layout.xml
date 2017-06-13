@@ -22,7 +22,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
-            android:padding="16dp" />
+
+            android:padding="3dp" />
 
         <TextView
             android:id="@+id/item_title"

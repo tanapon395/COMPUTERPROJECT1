@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.content_frame, homeFragment).commit();
 
-//        View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+//        View navHeaderView = navigationView.inflateHeaderView(R.layout.main_nav_header);
 //        tvHeaderName = (TextView) navHeaderView.findViewById(R.id.text_table);
 //        tvHeaderName.setText("Saly");
 //        tvHeaderName.setText("Saly");

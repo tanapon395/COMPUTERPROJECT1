@@ -13,51 +13,48 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHome.ViewHolder> {
+public class HomeMenu_RecyclerAdapter extends RecyclerView.Adapter<HomeMenu_RecyclerAdapter.ViewHolder> {
     private Context mContext;
 
-    public RecyclerAdapterHome(Context mContext) {
+    public HomeMenu_RecyclerAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    private String[] titles = {"กุ้งแม่น้ำเผาอร่อยสุดๆ",
+    private String[] titles = {"กุ้งเผา กิโลกรัมละ 200 บาท พร้อมบริการเผาฟรี", "ปูทะแล กิโลกรัมละ 250 บาท พร้อมบริการเผาฟรี", "ปลาหมึก กิโลกรัมล่ะ 200 บาท พร้อมบริการย่างฟรี"
+    };
+    private String[] name = {"กุ้งแม่น้ำเผาอร่อยสุดๆ",
             "ปูทะเลสดๆ",
             "ปลาหมึกสดๆ",
     };
 
-    private String[] details = {"กุ้งเผา กิโลกรัมละ 200 บาท พร้อมบริการเผาฟรี",
-            "ปูทะแล กิโลกรัมละ 250 บาท พร้อมบริการเผาฟรี", "ปลาหมึก กิโลกรัมล่ะ 200 บาท พร้อมบริการย่างฟรี",
-    };
-
-    private int[] images = {R.drawable.home2,
-            R.drawable.home3,
-            R.drawable.home1,
+    private int[] images = {R.drawable.home1menu,
+            R.drawable.home2menu,
+            R.drawable.home3menu,
     };
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public int currentItem;
-        public ImageView itemImage;
-        public TextView itemTitle;
-        public TextView itemDetail;
+        public ImageView cardImage;
+        public TextView cardTitle;
+        private TextView cardName;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemImage = (ImageView) itemView.findViewById(R.id.item_image);
-            itemTitle = (TextView) itemView.findViewById(R.id.item_title);
-            itemDetail = (TextView) itemView.findViewById(R.id.item_detail);
-
+            cardImage = (ImageView) itemView.findViewById(R.id.cardImage);
+            cardTitle = (TextView) itemView.findViewById(R.id.cardTitle);
+            cardName = (TextView) itemView.findViewById(R.id.menu_name_all);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     int position = getAdapterPosition();
 
                     Snackbar.make(v, "Click detected on item " + position,
                             Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
                 }
             });
         }
@@ -65,18 +62,17 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout_home, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.home_menu_card, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.itemTitle.setText(titles[i]);
-        viewHolder.itemDetail.setText(details[i]);
-        viewHolder.itemImage.setImageResource(images[i]);
-
-
+        viewHolder.cardTitle.setText(titles[i]);
+        viewHolder.cardName.setText(name[i]);
+        viewHolder.cardImage.setImageResource(images[i]);
     }
 
     @Override

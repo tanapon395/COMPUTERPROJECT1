@@ -14,7 +14,7 @@ import java.util.HashMap;
  * Created by Tanapon on 16/4/2560.
  */
 
-public class listviewAdapterBill extends BaseAdapter {
+public class Bill_ListviewAdapter extends BaseAdapter {
 
     public static final String FIRST_COLUMN = "Column 1";
     public static final String SECOND_COLUMN = "Column 2";
@@ -24,7 +24,7 @@ public class listviewAdapterBill extends BaseAdapter {
     public ArrayList<HashMap<String, String>> list;
     Activity activity;
 
-    public listviewAdapterBill(Activity activity, ArrayList<HashMap<String, String>> list) {
+    public Bill_ListviewAdapter(Activity activity, ArrayList<HashMap<String, String>> list) {
         super();
         this.activity = activity;
         this.list = list;
@@ -65,7 +65,7 @@ public class listviewAdapterBill extends BaseAdapter {
         ViewHolder holder;
         LayoutInflater inflater = activity.getLayoutInflater();
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.rows_bill, null);
+            convertView = inflater.inflate(R.layout.bill_rows, null);
             holder = new ViewHolder();
             holder.txtFirst = (TextView) convertView.findViewById(R.id.column1);
             holder.txtSecond = (TextView) convertView.findViewById(R.id.column2);

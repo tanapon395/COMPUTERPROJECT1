@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ServiceFragment extends Fragment {
     View myView;
     ArrayList<String> basicFields;
-    gridAdapterService adapter;
+    ServiceGridAdapter adapter;
     GridView gridView;
 
     @Nullable
@@ -32,7 +32,7 @@ public class ServiceFragment extends Fragment {
         basicFields.add("เติมน้ำจิ้ม");
         basicFields.add("เติมกระดาษ");
         basicFields.add("เติมน้ำซุป");
-        adapter = new gridAdapterService(getActivity(), basicFields);
+        adapter = new ServiceGridAdapter(getActivity(), basicFields);
         gridView.setAdapter(adapter);
 
         return myView;

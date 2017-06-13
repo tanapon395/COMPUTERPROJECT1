@@ -94,7 +94,7 @@ public class BillFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                final View alertLayout = inflater.inflate(R.layout.custom_bill, null);
+//                final View alertLayout = inflater.inflate(R.layout.bill_custom, null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //                builder.setView(alertLayout);
@@ -103,13 +103,13 @@ public class BillFragment extends Fragment {
                 builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Toast.makeText(getActivity(), "ขอบคุณที่ใช้บริการ", Toast.LENGTH_SHORT).show();
-                        checkBill.child("table_" + String.valueOf(highScore)).setValue("2");
+                        checkBill.child("table_" + String.valueOf(highScore)).setValue(2);
                     }
                 });
                 builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Toast.makeText(getActivity(), "ยกเลิก", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();

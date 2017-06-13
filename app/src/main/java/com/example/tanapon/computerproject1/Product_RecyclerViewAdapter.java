@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter_Product extends RecyclerView.Adapter<RecyclerViewHolders_Product> {
+public class Product_RecyclerViewAdapter extends RecyclerView.Adapter<Product_RecyclerViewHolders> {
 
 
-    private List<ItemObject_Product> itemList;
+    private List<Product_ItemObject> itemList;
     private Context context;
     private ArrayList<String> myArrList;
 
-    public RecyclerViewAdapter_Product(Context context, List<ItemObject_Product> itemList, ArrayList<String> myArrList) {
+    public Product_RecyclerViewAdapter(Context context, List<Product_ItemObject> itemList, ArrayList<String> myArrList) {
         this.itemList = itemList;
         this.context = context;
         this.myArrList = myArrList;
@@ -25,14 +25,14 @@ public class RecyclerViewAdapter_Product extends RecyclerView.Adapter<RecyclerVi
 
 
     @Override
-    public RecyclerViewHolders_Product onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_product, null);
-        RecyclerViewHolders_Product rcv = new RecyclerViewHolders_Product(layoutView, context, myArrList);
+    public Product_RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_recycler_item, null);
+        Product_RecyclerViewHolders rcv = new Product_RecyclerViewHolders(layoutView, context, myArrList);
         return rcv;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolders_Product holder, int position) {
+    public void onBindViewHolder(Product_RecyclerViewHolders holder, int position) {
         holder.txtTitle.setText(itemList.get(position).getTitle());
         holder.txtDescription.setText(itemList.get(position).getDescription());
         holder.txtOptionDigit.setBackgroundResource(itemList.get(position).getOptionDigit());

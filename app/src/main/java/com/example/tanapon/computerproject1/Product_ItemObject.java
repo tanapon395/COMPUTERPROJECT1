@@ -1,14 +1,14 @@
 package com.example.tanapon.computerproject1;
 
 
-public class ItemObject_Product {
+public class Product_ItemObject {
 
     private String title;
     private String description;
     private int OptionDigit;
 
 
-    public ItemObject_Product(String title, String description, int OptionDigit) {
+    public Product_ItemObject(String title, String description, int OptionDigit) {
         this.title = title;
         this.description = description;
         this.OptionDigit = OptionDigit;

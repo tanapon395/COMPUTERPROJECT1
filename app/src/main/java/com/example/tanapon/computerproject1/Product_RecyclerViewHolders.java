@@ -24,18 +24,19 @@ import java.util.ArrayList;
 
 import static android.R.attr.defaultValue;
 
-public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
+public class Product_RecyclerViewHolders extends RecyclerView.ViewHolder {
 
     public TextView txtTitle;
     public TextView txtDescription;
     public ImageButton txtOptionDigit;
-    private DatabaseReference mRoot, mRoot_Bill, mCheck, mSumNumber, mSumPrice;
+    private DatabaseReference mRoot, mRoot_Bill, mCheck, mSumNumber, mSumPrice, mSumColor;
+    private DatabaseReference mCharts;
     SharedPreferences sharedPref, sharedPref_bill;
     String list = "";
-    int sumPrice = 0, sumNumber = 0;
+    int sumPrice = 0, sumNumber = 0, sumColor = 0;
 
 
-    public RecyclerViewHolders_Product(View itemView, final Context mContext, final ArrayList<String> myArrList) {
+    public Product_RecyclerViewHolders(View itemView, final Context mContext, final ArrayList<String> myArrList) {
         super(itemView);
         txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
         txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
@@ -50,7 +51,7 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
             public void onClick(View v) {
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View alertLayout = inflater.inflate(R.layout.custom_dialog_product, null);
+                final View alertLayout = inflater.inflate(R.layout.product_custom_dialog, null);
                 final Spinner spNumber = (Spinner) alertLayout.findViewById(R.id.thai_club);
 
                 final String[] CLUBS12 = {"หมูเเนื้อแดง", "หมูสามชั้น", "ทะเล", "รวมมิตร"};
@@ -92,9 +93,21 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
         mCheck = mRoot.child("table_" + String.valueOf(highScore)).child(check).push();
         mSumNumber = mRoot.child("table_" + String.valueOf(highScore)).child(check).child("sum_menu");
         mSumPrice = mRoot.child("table_" + String.valueOf(highScore)).child(check).child("price");
+        mSumColor = mRoot.child("table_" + String.valueOf(highScore)).child(check).child("checkcolor");
+
+        mCharts = FirebaseDatabase.getInstance().getReference().child("charts");
 
         mRoot_Bill = FirebaseDatabase.getInstance().getReference().child("bill").child(bill).child("table_" + String.valueOf(highScore));
+        mSumColor.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                sumColor = Integer.parseInt(dataSnapshot.getValue().toString());
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         mSumNumber.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -136,13 +149,13 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
             public void onClick(DialogInterface dialog, int which) {
                 StringBuffer buffer = new StringBuffer();
                 for (Integer team : mMultiSelected_menu35) {
-                    buffer.append(" ");
                     buffer.append(list[team]);
+                    buffer.append(" ");
                 }
                 String sp = String.valueOf(spNumber.getSelectedItem());
 
                 mCheck.child("list").setValue(buffer.toString());
-                mCheck.child("number").setValue(sp);
+                mCheck.child("number").setValue(Integer.parseInt(sp));
 
                 sumNumber = (sumNumber + Integer.parseInt(sp));
                 mSumNumber.setValue(sumNumber);
@@ -151,6 +164,12 @@ public class RecyclerViewHolders_Product extends RecyclerView.ViewHolder {
 
                 sumPrice = (sumNumber * price);
                 mSumPrice.setValue(sumPrice);
+
+                sumColor++;
+                mSumColor.setValue(sumColor);
+
+                //Charts
+                mCharts.child(check).child("summenu_table_" + String.valueOf(highScore)).setValue(sumNumber);
 
                 Toast.makeText(mContext, "คุณเลือก " + buffer.toString() + "\nจำนวน " + sp, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
